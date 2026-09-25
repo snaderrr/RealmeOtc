@@ -27,6 +27,17 @@ android {
     kotlinOptions { jvmTarget = "17" }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("com.github.pedroSG94.RootEncoder:library:2.5.5")
+        force("com.github.pedroSG94.RootEncoder:common:2.5.5")
+        force("com.github.pedroSG94.RootEncoder:rtsp:2.5.5")
+        force("com.github.pedroSG94.RootEncoder:rtmp:2.5.5")
+        force("com.github.pedroSG94.RootEncoder:srt:2.5.5")
+        force("com.github.pedroSG94.RootEncoder:udp:2.5.5")
+    }
+}
+
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

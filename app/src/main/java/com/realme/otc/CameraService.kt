@@ -30,12 +30,11 @@ class CameraService : Service(), ConnectChecker {
 
         if (rtsp == null) {
             try {
-                rtsp = RtspServerCamera2(this, true, this)
-                rtsp?.apply {
-                    prepareVideo(1280, 720, 30, 2_000_000)
-                    prepareAudio(64_000, 32_000, true)
-                    startStream()
-                }
+                val r = RtspServerCamera2(this, true, this)
+                r.prepareVideo(1280, 720, 30, 2_000_000)
+                r.prepareAudio(64_000, 32_000, true, false)
+                r.startStream()
+                rtsp = r
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -44,10 +43,6 @@ class CameraService : Service(), ConnectChecker {
     }
 
     override fun onDestroy() {
-        try {
-            rtsp?.stopStream()
-            rtsp?.stopPreview()
-        } catch (_: Exception) {}
         rtsp = null
         super.onDestroy()
     }

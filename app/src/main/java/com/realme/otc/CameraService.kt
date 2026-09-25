@@ -8,7 +8,7 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.pedro.common.ConnectChecker
-import com.pedro.library.rtsp.RtspServerCamera2
+import com.pedro.rtpserver.RtspServerCamera2
 
 class CameraService : Service(), ConnectChecker {
 

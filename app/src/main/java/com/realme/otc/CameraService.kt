@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import net.majorkernelpanic.streaming.Session
 import net.majorkernelpanic.streaming.SessionBuilder
 import net.majorkernelpanic.streaming.audio.AudioQuality
 import net.majorkernelpanic.streaming.rtsp.RtspServer
@@ -15,12 +14,9 @@ import net.majorkernelpanic.streaming.video.VideoQuality
 
 class CameraService : Service() {
 
-    private var rtspServer: RtspServer? = null
-
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        // 1. Уведомление для foreground-режима
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val ch = NotificationChannel("cam", "Camera", NotificationManager.IMPORTANCE_LOW)
             getSystemService(NotificationManager::class.java).createNotificationChannel(ch)
@@ -32,28 +28,17 @@ class CameraService : Service() {
             .build()
         startForeground(1, notif)
 
-        // 2. Настройка сессии (качество HD, звук)
         SessionBuilder.getInstance()
             .setContext(applicationContext)
             .setAudioEncoder(SessionBuilder.AUDIO_AAC)
             .setAudioQuality(AudioQuality(44100, 128000))
             .setVideoEncoder(SessionBuilder.VIDEO_H264)
             .setVideoQuality(VideoQuality(1280, 720, 30, 2_000_000))
-            .setCallback(null)
 
-        // 3. Запуск RTSP-сервера
-        if (rtspServer == null) {
-            rtspServer = RtspServer(this)
-            rtspServer?.setPort(8554)
-            rtspServer?.start()
-        }
+        val server = RtspServer.getInstance()
+        server.setPort(8554)
+        server.start()
 
         return START_STICKY
-    }
-
-    override fun onDestroy() {
-        rtspServer?.stop()
-        rtspServer = null
-        super.onDestroy()
     }
 }

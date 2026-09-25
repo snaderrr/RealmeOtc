@@ -3,32 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="24dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Realme otc"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:paddingBottom="48dp" />
-
-    <Button
-        android:id="@+id/cameraModeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="📷 Я — камера" />
+        android:text="Адрес камеры (RTSP)"
+        android:textSize="16sp"
+        android:paddingBottom="8dp" />
 
-    <Button
-        android:id="@+id/viewerModeButton"
+    <EditText
+        android:id="@+id/urlInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="👁 Я — зритель" />
+        android:hint="rtsp://192.168.1.42:8554/live"
+        android:inputType="textUri"
+        android:paddingBottom="16dp" />
 
     <Button
-        android:id="@+id/settingsButton"
+        android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="⚙ Настройки" />
+        android:text="Сохранить адрес" />
+
+    <Button
+        android:id="@+id/connectButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Подключиться" />
 </LinearLayout>

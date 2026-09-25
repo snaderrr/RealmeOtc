@@ -7,10 +7,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.pedro.common.ConnectChecker
-import com.pedro.rtpserver.RtspServerCamera2
+import com.pedro.rtplibrary.rtsp.RtspServerCamera2
 
-class CameraService : Service(), ConnectChecker {
+class CameraService : Service() {
 
     private var rtsp: RtspServerCamera2? = null
 
@@ -30,7 +29,7 @@ class CameraService : Service(), ConnectChecker {
 
         if (rtsp == null) {
             try {
-                val r = RtspServerCamera2(this, true, this)
+                val r = RtspServerCamera2(this, true)
                 r.prepareVideo(1280, 720, 30, 2_000_000)
                 r.prepareAudio(64_000, 32_000, true, false)
                 r.startStream()
@@ -46,12 +45,4 @@ class CameraService : Service(), ConnectChecker {
         rtsp = null
         super.onDestroy()
     }
-
-    override fun onConnectionStarted(url: String) {}
-    override fun onConnectionSuccess() {}
-    override fun onConnectionFailed(reason: String) {}
-    override fun onNewBitrate(bitrate: Long) {}
-    override fun onDisconnect() {}
-    override fun onAuthError() {}
-    override fun onAuthSuccess() {}
 }

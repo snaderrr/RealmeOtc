@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.realme.otc"
-    compileSdk = 37
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.realme.otc"
         minSdk = 24
-        targetSdk = 37
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
@@ -32,8 +32,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
 
-    implementation("com.github.pedroSG94.RootEncoder:library:2.8.0")
-    implementation("com.github.pedroSG94:RTSP-Server:1.4.2")
+    implementation("com.github.pedroSG94.RootEncoder:library:2.4.0")
+    implementation("com.github.pedroSG94:RTSP-Server:1.1.5")
 
     implementation("androidx.media3:media3-exoplayer:1.3.1")
     implementation("androidx.media3:media3-exoplayer-rtsp:1.3.1")

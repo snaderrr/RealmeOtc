@@ -32,8 +32,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
 
-    implementation("com.github.ar-android:libstreaming:1.0.0")
-
+    implementation("com.github.pedroSG94.RootEncoder:library:2.2.6")
     implementation("androidx.media3:media3-exoplayer:1.3.1")
     implementation("androidx.media3:media3-exoplayer-rtsp:1.3.1")
     implementation("androidx.media3:media3-ui:1.3.1")

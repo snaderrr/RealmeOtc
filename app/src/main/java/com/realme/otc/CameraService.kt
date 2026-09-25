@@ -7,12 +7,12 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import net.majorkernelpanic.streaming.SessionBuilder
-import net.majorkernelpanic.streaming.audio.AudioQuality
-import net.majorkernelpanic.streaming.rtsp.RtspServer
-import net.majorkernelpanic.streaming.video.VideoQuality
+import com.pedro.common.ConnectChecker
+import com.pedro.rtpserver.RtspServerCamera2
 
-class CameraService : Service() {
+class CameraService : Service(), ConnectChecker {
+
+    private var rtsp: RtspServerCamera2? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -28,17 +28,30 @@ class CameraService : Service() {
             .build()
         startForeground(1, notif)
 
-        SessionBuilder.getInstance()
-            .setContext(applicationContext)
-            .setAudioEncoder(SessionBuilder.AUDIO_AAC)
-            .setAudioQuality(AudioQuality(44100, 128000))
-            .setVideoEncoder(SessionBuilder.VIDEO_H264)
-            .setVideoQuality(VideoQuality(1280, 720, 30, 2_000_000))
-
-        val server = RtspServer.getInstance()
-        server.setPort(8554)
-        server.start()
-
+        if (rtsp == null) {
+            try {
+                val r = RtspServerCamera2(this, true, this)
+                r.prepareVideo(1280, 720, 30, 2_000_000)
+                r.prepareAudio(64_000, 32_000, true, false)
+                r.startStream()
+                rtsp = r
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
         return START_STICKY
     }
+
+    override fun onDestroy() {
+        rtsp = null
+        super.onDestroy()
+    }
+
+    override fun onConnectionStarted(url: String) {}
+    override fun onConnectionSuccess() {}
+    override fun onConnectionFailed(reason: String) {}
+    override fun onNewBitrate(bitrate: Long) {}
+    override fun onDisconnect() {}
+    override fun onAuthError() {}
+    override fun onAuthSuccess() {}
 }

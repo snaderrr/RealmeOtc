@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.RealmeOtc" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/realme_yellow</item>
+        <item name="colorPrimaryVariant">@color/realme_yellow</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+</resources>

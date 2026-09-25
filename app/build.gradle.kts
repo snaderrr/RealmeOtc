@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.realme.otc"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.realme.otc"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
@@ -27,24 +27,12 @@ android {
     kotlinOptions { jvmTarget = "17" }
 }
 
-configurations.all {
-    resolutionStrategy {
-        force("com.github.pedroSG94.RootEncoder:library:2.5.5")
-        force("com.github.pedroSG94.RootEncoder:common:2.5.5")
-        force("com.github.pedroSG94.RootEncoder:rtsp:2.5.5")
-        force("com.github.pedroSG94.RootEncoder:rtmp:2.5.5")
-        force("com.github.pedroSG94.RootEncoder:srt:2.5.5")
-        force("com.github.pedroSG94.RootEncoder:udp:2.5.5")
-    }
-}
-
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
 
-    implementation("com.github.pedroSG94.RootEncoder:library:2.5.5")
-    implementation("com.github.pedroSG94:RTSP-Server:1.3.0")
+    implementation("com.github.ar-android:libstreaming:1.0.0")
 
     implementation("androidx.media3:media3-exoplayer:1.3.1")
     implementation("androidx.media3:media3-exoplayer-rtsp:1.3.1")

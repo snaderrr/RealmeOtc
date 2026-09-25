@@ -17,10 +17,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Android SDK (v6 for SDK 37)
-        uses: amyu/setup-android@v6
+      - name: Setup Android SDK
+        uses: amyu/setup-android@v6.0
         with:
-          sdk-version: 37
+          sdk-version: "37.0"
 
       - name: Setup Gradle 9.0
         uses: gradle/actions/setup-gradle@v4
